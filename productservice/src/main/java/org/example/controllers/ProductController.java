@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     @PostMapping("/")
     public ProductResponseDTO addProduct(@RequestBody ProductRequestDTO productRequestDTO){
@@ -22,7 +22,7 @@ public class ProductController {
         return productService.addProduct(productRequestDTO);
     }
 
-    @PostMapping("/")
+    @PatchMapping("/{id}")
     public ProductResponseDTO updateProduct(@RequestBody ProductRequestDTO productRequestDTO, @PathVariable("id") Integer id) {
         // to be impl
         return productService.updateProduct(id, productRequestDTO);
@@ -43,7 +43,7 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public List<ProductResponseDTO> getProducts() {
         // to be impl
         return productService.getAllProducts();
