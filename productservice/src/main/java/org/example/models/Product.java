@@ -1,6 +1,7 @@
 package org.example.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,6 +11,7 @@ import java.sql.Time;
 
 @Entity
 @Table(name = "products")
+@Data
 public class Product {
 
     @Id
@@ -24,8 +26,9 @@ public class Product {
 
     private Double price;
 
-    @ManyToOne
-    private Integer categoryId;
+    // to be included
+//    @ManyToOne
+//    private Integer categoryId;
 
     @CreationTimestamp
     private Time creationTime;

@@ -1,0 +1,43 @@
+package org.example.services;
+
+import lombok.RequiredArgsConstructor;
+import org.example.dtos.ProductRequestDTO;
+import org.example.dtos.ProductResponseDTO;
+import org.example.models.Product;
+import org.example.repositories.ProductRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+public class ProductService {
+
+    private ProductRepository productRepository;
+
+    public List<ProductResponseDTO> getAllProducts() {
+        return productRepository
+                .findAll()
+                .stream()
+                .map(product -> ProductConverterService.toProductResponseDTO(product))
+                .toList();
+    }
+
+    public ProductResponseDTO getProductById(Integer id){
+        Optional<Product> product = productRepository.findById(id);
+        if(product.isEmpty()){
+            throw new IllegalArgumentException("no product found with given id");
+        }
+
+        return ProductConverterService.toProductResponseDTO(product.get());
+    }
+
+    public ProductResponseDTO addProduct(ProductRequestDTO productRequestDTO){
+        Product product = productRepository.save(ProductConverterService.toProduct(productRequestDTO));
+
+        return ProductConverterService.toProductResponseDTO(product);
+    }
+
+    public
+}
