@@ -39,5 +39,26 @@ public class ProductService {
         return ProductConverterService.toProductResponseDTO(product);
     }
 
-    public
+    public void deleteProduct(Integer id){
+
+        productRepository.deleteById(id);
+
+        return;
+    }
+
+    public ProductResponseDTO updateProduct(Integer id, ProductRequestDTO productRequestDTO){
+
+        Optional<Product> productInfo = productRepository.findById(id);
+
+        if(productInfo.isEmpty()){
+            throw new IllegalArgumentException("product with given id not found");
+        }
+
+        Product product = productInfo.get();
+        product.setName(productRequestDTO.getName());
+        product.setDescription(productRequestDTO.getDescription());
+        product.setPrice(productRequestDTO.getPrice());
+
+        return ProductConverterService.toProductResponseDTO(productRepository.save(product));
+    }
 }
