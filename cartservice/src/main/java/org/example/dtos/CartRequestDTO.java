@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductInsertDTO {
+public class CartRequestDTO {
 
-    private Integer productId;
+    private Integer userId;
 
-    private Integer quantity;
+    private List<CartItemRequestDTO> cartItemRequestDTOS;
+
 }

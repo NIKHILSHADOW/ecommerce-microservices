@@ -1,20 +1,21 @@
 package org.example.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.Table;
-import org.example.dtos.CartItemPrimaryKey;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "cart-items")
-@IdClass(CartItemPrimaryKey.class)
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class CartItem {
 
     @Id
     private Integer productId;
 
-    @Id
+    @ManyToOne
     private Integer cartId;
 
     private Integer quantity;

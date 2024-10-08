@@ -2,12 +2,19 @@ package org.example.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.catalina.util.Introspection;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "inventory")
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Inventory {
 
     @Id
@@ -18,11 +25,11 @@ public class Inventory {
 
     private Integer quantity;
 
-    public static Inventory inventory(Integer productId, Integer quantity){
-        Inventory inventory = new Inventory();
-        inventory.productId = productId;
-        inventory.quantity = quantity;
+//    private Integer supplierId;
 
-        return inventory;
-    }
+    @CreationTimestamp
+    private Date createdTime;
+
+    @UpdateTimestamp
+    private Date updatedTime;
 }

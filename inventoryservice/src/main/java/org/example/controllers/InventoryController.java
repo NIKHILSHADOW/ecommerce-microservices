@@ -1,13 +1,10 @@
 package org.example.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dtos.ProductInsertDTO;
 import org.example.dtos.ProductRequestDTO;
+import org.example.dtos.ProductResponseDTO;
 import org.example.services.InventoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v0/inventory")
@@ -17,17 +14,17 @@ public class InventoryController {
     private final InventoryService inventoryService;
 
     @PostMapping("/")
-    public void addProductToInventoryIfNotPresent(@RequestBody ProductInsertDTO productInsertDTO){
+    public ProductResponseDTO addProductToInventoryIfNotPresent(@RequestBody ProductRequestDTO productRequestDTO){
         // to be implemented
 
-        return ;
+        return inventoryService.addProductToInventoryIfNotPresent(productRequestDTO);
     }
 
-    @PutMapping("/")
-    public void updateProductToInventory(@RequestBody ProductInsertDTO productInsertDTO){
-
+    @PatchMapping("/{id}")
+    public ProductResponseDTO updateInventory(@RequestBody ProductRequestDTO productRequestDTO){
         // to be impl
-        return ;
+
+        return inventoryService.updateInventory(productRequestDTO);
     }
 
 
